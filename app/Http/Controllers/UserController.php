@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -29,9 +30,9 @@ class UserController extends Controller
         'email'=>'required',
         'password'=>'required'
        ]);
-       if(auth()->attempt(['name'=>$validate['email'],'password' => $validate['password']])){
-        $request->session()->regenerate();
+       if(auth()->attempt(['email'=>$validate['email'],'password' => $validate['password']])){
+        $userId = Auth::id();
        }
-       return redirect('/utilisateur');
+       return redirect()->route('utilisateur', ['userId' => $userId]);
     }
 }

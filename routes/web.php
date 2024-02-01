@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\aventuresController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// -----------------------------------------------------------
 Route::get('/', function () {
     return view('welcome');
 });
@@ -31,13 +34,20 @@ Route::get('/register', function () {
 
 Route::get('/utilisateur', function () {
     return view('utilisateur');
-});
+})->name('utilisateur');
+// ---------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
 Route::post('/register',[UserController::class,'userRegister']);
 
 Route::post('/login',[UserController::class,'login']);
 
 Route::post('/',[UserController::class,'logout'])->name('logout') ;
+
+// --------------------------------------------------------------------------
+
+Route::post('/utilisateur',[aventuresController::class,'addAventure'])->name('utilisateur');
+
 
 
 
