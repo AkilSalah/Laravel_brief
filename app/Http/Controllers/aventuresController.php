@@ -48,6 +48,20 @@ class aventuresController extends Controller
         return back()->with('error', 'Aucune image téléchargée!');
     }
 }
+    public function afficherAventuresUser(){
+        $userId = Auth::id();
+        $aventures = Aventure::where('id_users',$userId)->with('images')->get();
+        return view ('utilisateur', compact('aventures'));
+    } 
+
+    public function afficherAll(){
+        $aventures = Aventure::with('images')->get();
+        return view ('welcome',compact('aventures'));
+    }
+
+
+
+
 
 }
 

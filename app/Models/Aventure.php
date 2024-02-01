@@ -25,7 +25,7 @@ class Aventure extends Model
 
     public function images()
 {
-    return $this->hasMany(AventureImages::class);
+    return $this->hasMany(AventureImages::class,'id_aventure');
 }
 }
 

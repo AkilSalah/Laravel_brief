@@ -47,6 +47,9 @@ Route::post('/',[UserController::class,'logout'])->name('logout') ;
 // --------------------------------------------------------------------------
 
 Route::post('/utilisateur', [aventuresController::class, 'addAventure'])->name('utilisateur');
+Route::get('/utilisateur', [aventuresController::class, 'afficherAventuresUser'])->name('aventures.utilisateur');
+Route::get('/', [aventuresController::class, 'afficherAll'])->name('aventures.welcome');
+
 
 
 
