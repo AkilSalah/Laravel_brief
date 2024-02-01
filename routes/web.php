@@ -46,7 +46,7 @@ Route::post('/',[UserController::class,'logout'])->name('logout') ;
 
 // --------------------------------------------------------------------------
 
-Route::post('/utilisateur',[aventuresController::class,'addAventure'])->name('utilisateur');
+Route::post('/utilisateur', [aventuresController::class, 'addAventure'])->name('utilisateur');
 
 
 

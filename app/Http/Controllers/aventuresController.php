@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aventure;
-use App\Models\aventures;
-use App\Models\User;
+use App\Models\AventureImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,30 +15,33 @@ class aventuresController extends Controller
         'ville' => 'required',
         'paye' => 'required',
         'continent' => 'required',
-        'images' => 'required|file',
+        'images' => 'required|array', 
+        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'description' => 'required',
         'conseils' => 'required',
     ]);
 
+    $userId = Auth::id();
+
+    $newAventure = Aventure::create([
+        'id_users' => $userId,
+        'ville' => $data['ville'],
+        'paye' => $data['paye'],
+        'continent' => $data['continent'],
+        'description' => $data['description'],
+        'conseils' => $data['conseils'],
+    ]);
+
     if ($request->hasFile('images')) {
-        $file = $request->file('images');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $file->storeAs('public/images', $filename);
+        foreach ($request->file('images') as $file) {
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/images', $filename);
 
-        $userId = Auth::id();
-
-        $newAventure = Aventure::create([
-            'id_users' => $userId,
-            'ville' => $data['ville'],
-            'paye' => $data['paye'],
-            'continent' => $data['continent'],
-            'description' => $data['description'],
-            'conseils' => $data['conseils'],
-        ]);
-
-        $newImageAventure = $newAventure->images()->create([
-            'images' => $filename,
-        ]);
+            $newAventureImage = AventureImages::create([
+                'image' => $filename, 
+                'id_aventure' => $newAventure->id
+            ]);
+        }
 
         return redirect()->route('utilisateur')->with('success', 'Aventure ajoutée avec succès!');
     } else {
@@ -47,6 +49,10 @@ class aventuresController extends Controller
     }
 }
 
-
-    
 }
+
+
+
+
+
+	

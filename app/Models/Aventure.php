@@ -20,12 +20,12 @@ class Aventure extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_users');
+        return $this->belongsTo(User::class);
     }
 
     public function images()
 {
-    return $this->hasMany(AventureImages::class, 'id_aventure');
+    return $this->hasMany(AventureImages::class);
 }
 }
 

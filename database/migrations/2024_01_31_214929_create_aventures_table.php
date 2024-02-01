@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('ville');
             $table->string('paye');
             $table->string('continent');
-            $table->string('image');
             $table->string('description');
             $table->string('conseils');
             $table->timestamps();
