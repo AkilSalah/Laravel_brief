@@ -55,34 +55,56 @@ class aventuresController extends Controller
         return view ('utilisateur', compact('aventures'));
     } 
 
-    public function afficherAll(){
-        $aventures = Aventure::with('images')->get();
+    public function afficherAll(Request $request){
+
+        $aventuresQuery = Aventure::with('images');
+    
+        $sortOrder = $request->input('sort_order', 'desc'); 
+        $aventuresQuery->orderBy('id', $sortOrder);
+    
+        $destination = $request->input('destination');
+        if ($destination && $destination !== 'Tout') {
+            $aventuresQuery->where('continent', $destination);
+        }
+    
+        $aventures = $aventuresQuery->get();
+    
         $userCount = User::count();
         $aventureCount = Aventure::count();
         $DestinationsCount = Aventure::distinct('continent')->count();
+    
         return view('welcome', compact('aventures', 'userCount', 'aventureCount', 'DestinationsCount'));
     }
     
-
-    public function filterDesc(){
-        $aventures = Aventure::with('images')->orderBy('id', 'desc')->get();
-        return view ('welcome', compact('aventures'));
-    }
     
-    public function filterAsc(){
-        $aventures = Aventure::with('images')->orderBy('id', 'asc')->get();
-        return view ('welcome', compact('aventures'));
-    }
 
-    public function filterDestination(Request $request){
-        $destination = $request->input('destination');
-        if($destination==='Tout'){
-        $aventures = Aventure::with('images')->get();
-        }else{
-        $aventures = Aventure::where('continent',$destination)->with('images')->get();
-        }
-        return view ('welcome', compact('aventures'));
-    }
+    // public function afficherAll(){
+    //     $aventures = Aventure::with('images')->get();
+    //     $userCount = User::count();
+    //     $aventureCount = Aventure::count();
+    //     $DestinationsCount = Aventure::distinct('continent')->count();
+    //     return view ('welcome',compact('aventures','userCount','aventureCount','DestinationsCount'));
+    // }
+
+    // public function filterDesc(){
+    //     $aventures = Aventure::with('images')->orderBy('id', 'desc')->get();
+    //     return view ('welcome', compact('aventures'));
+    // }
+    
+    // public function filterAsc(){
+    //     $aventures = Aventure::with('images')->orderBy('id', 'asc')->get();
+    //     return view ('welcome', compact('aventures'));
+    // }
+
+    // public function filterDestination(Request $request){
+    //     $destination = $request->input('destination');
+    //     if($destination==='Tout'){
+    //     $aventures = Aventure::with('images')->get();
+    //     }else{
+    //     $aventures = Aventure::where('continent',$destination)->with('images')->get();
+    //     }
+    //     return view ('welcome', compact('aventures'));
+    // }
 
     public function singleAventure(Request $request){
         $id = $request->query('id');

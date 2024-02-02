@@ -20,10 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/aventure', function () {
-    return view('singleAventure');
-});
-
 Route::get('/login', function () {
     return view('login');
 });
@@ -55,9 +51,10 @@ Route::get('/', [aventuresController::class, 'afficherAll']);
 
 // -------------------------------------------------------------------------------------------
 
-Route::get('/filterDesc', [aventuresController::class, 'filterDesc'])->name('desc');
-Route::get('/filterAsc', [aventuresController::class, 'filterAsc'])->name('asc');
-Route::get('/destination', [aventuresController::class, 'filterDestination'])->name('destination');
+Route::get('/filterDesc', [aventuresController::class, 'afficherAll'])->name('desc');
+Route::get('/filterAsc', [aventuresController::class, 'afficherAll'])->name('asc');
+Route::get('/destination', [aventuresController::class, 'afficherAll'])->name('destination');
+
 
 // -------------------------------------------------------------------------------------------
 
