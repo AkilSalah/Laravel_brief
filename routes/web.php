@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 // -----------------------------------------------------------
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/aventure', function () {
+Route::get('welcome/aventure', function () {
     return view('singleAventure');
 });
 
@@ -48,10 +48,17 @@ Route::post('/',[UserController::class,'logout'])->name('logout') ;
 
 Route::post('/utilisateur', [aventuresController::class, 'addAventure'])->name('utilisateur');
 Route::get('/utilisateur', [aventuresController::class, 'afficherAventuresUser'])->name('aventures.utilisateur');
-Route::get('/', [aventuresController::class, 'afficherAll'])->name('aventures.welcome');
+
+Route::get('/welcome', [aventuresController::class, 'afficherAll'])->name('welcome');
+
+Route::get('/welcome/filterDesc', [aventuresController::class, 'filterDesc'])->name('filter.desc');
+Route::get('/welcome/filterAsc', [aventuresController::class, 'filterAsc'])->name('filter.asc');
+
+Route::get('/welcome/destination', [aventuresController::class, 'filterDestination'])->name('filter.destination');
 
 
 
+Route::get('/welcome/aventure', [aventuresController::class, 'singleAventure']);
 
 
 

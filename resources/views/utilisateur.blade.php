@@ -38,10 +38,14 @@ Ajouter une aventure
                           <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Paye</label>
                           <input type="text" name="paye" id="paye" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Exemple : Maroc" required="">
                       </div>
-                      <div class="col-span-2 sm:col-span-1">
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Continent</label>
-                        <input type="text" name="continent" id="continent" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Exemple : Afrique" required="">
-                    </div>
+                      <select id="countries" name="continent" class=" mt-6 ml-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Selectionné un Continent</option>
+                        <option value='Afrique'>Afrique</option>
+                        <option value='Euroupe'>Euroupe</option>
+                        <option value='Asie'>Asie</option>
+                        <option value='Amérique du Nord'>Amérique du Nord</option>
+                        <option value='Amérique du Sud'>Amérique du Sud</option>
+                      </select>
                     <div class="col-span-2">
                         <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Images</label>
                         <input type="file" name="images[]" id="images" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Inserer des images" multiple required >
@@ -66,15 +70,12 @@ Ajouter une aventure
       </div>
   </div> 
 </div>
-    
-
-    
-<div class="flex flex-row gap-4 mx-auto mt-20">
+        
+<div class="flex flex-wrap gap-4  justify-center mt-20">
     @foreach ($aventures as $aventure)
-        <div class="w-full border rounded-md md:w-1/2 lg:w-1/3 p-4">
-            @foreach ($aventure->images as $image)
-            <img class="rounded-t-lg h-25 " src="{{ URL('/storage/images/'.$image->image) }}" alt=""   />
-            @break
+        <div class="w-full lg:w-1/3 p-4">
+            @foreach ($aventure->images->take(1) as $image)
+                <img class="rounded-t-lg h-25" src="{{ URL('/storage/images/'.$image->image) }}" alt="" />
             @endforeach
             <div class="p-5">
                 <a href="#">

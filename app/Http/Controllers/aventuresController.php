@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aventure;
 use App\Models\AventureImages;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,13 +57,39 @@ class aventuresController extends Controller
 
     public function afficherAll(){
         $aventures = Aventure::with('images')->get();
-        return view ('welcome',compact('aventures'));
+        $userCount = User::count();
+        $aventureCount = Aventure::count();
+        $DestinationsCount = Aventure::distinct('continent')->count();
+        return view ('welcome',compact('aventures','userCount','aventureCount','DestinationsCount'));
     }
 
+    public function filterDesc(){
+        $aventures = Aventure::with('images')->orderBy('id', 'desc')->get();
+        return view ('welcome', compact('aventures'));
+    }
+    
+    public function filterAsc(){
+        $aventures = Aventure::with('images')->orderBy('id', 'asc')->get();
+        return view ('welcome', compact('aventures'));
+    }
 
+    public function filterDestination(Request $request){
+        $destination = $request->input('destination');
+        if($destination==='Tout'){
+        $aventures = Aventure::with('images')->get();
+        }else{
+        $aventures = Aventure::where('continent',$destination)->with('images')->get();
+        }
+        return view ('welcome', compact('aventures'));
+    }
 
+    public function singleAventure(Request $request){
+        $id = $request->query('id');
+        $singleAventure = Aventure::where('id',$id)->with('images','user')->get();
+        return view ('singleAventure',compact('singleAventure'));
+    }
 
-
+    
 }
 
 
