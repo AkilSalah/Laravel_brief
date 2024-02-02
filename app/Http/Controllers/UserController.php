@@ -23,7 +23,7 @@ class UserController extends Controller
     }
     public function logout(){
         auth()->logout();
-        return redirect('/');
+        return redirect('/welcome');
     }
     public function login(Request $request){
        $validate = $request->validate([

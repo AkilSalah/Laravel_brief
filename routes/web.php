@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 // -----------------------------------------------------------
-Route::get('/welcome', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('welcome/aventure', function () {
+Route::get('/aventure', function () {
     return view('singleAventure');
 });
 
@@ -45,20 +45,26 @@ Route::post('/login',[UserController::class,'login']);
 Route::post('/',[UserController::class,'logout'])->name('logout') ;
 
 // --------------------------------------------------------------------------
-
+// -------------------------------------------------------------------------------------------
 Route::post('/utilisateur', [aventuresController::class, 'addAventure'])->name('utilisateur');
 Route::get('/utilisateur', [aventuresController::class, 'afficherAventuresUser'])->name('aventures.utilisateur');
-
-Route::get('/welcome', [aventuresController::class, 'afficherAll'])->name('welcome');
-
-Route::get('/welcome/filterDesc', [aventuresController::class, 'filterDesc'])->name('filter.desc');
-Route::get('/welcome/filterAsc', [aventuresController::class, 'filterAsc'])->name('filter.asc');
-
-Route::get('/welcome/destination', [aventuresController::class, 'filterDestination'])->name('filter.destination');
+// -------------------------------------------------------------------------------------------
 
 
+Route::get('/', [aventuresController::class, 'afficherAll']);
 
-Route::get('/welcome/aventure', [aventuresController::class, 'singleAventure']);
+// -------------------------------------------------------------------------------------------
+
+Route::get('/filterDesc', [aventuresController::class, 'filterDesc'])->name('desc');
+Route::get('/filterAsc', [aventuresController::class, 'filterAsc'])->name('asc');
+Route::get('/destination', [aventuresController::class, 'filterDestination'])->name('destination');
+
+// -------------------------------------------------------------------------------------------
+
+
+
+
+Route::get('/aventure', [aventuresController::class, 'singleAventure']);
 
 
 

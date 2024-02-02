@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Aventure extends Model
 {
     use HasFactory;
+    protected $with = ["user", "images"];
 
     protected $fillable = [
         'id_users',
@@ -20,7 +21,7 @@ class Aventure extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'id_users');
     }
 
     public function images()

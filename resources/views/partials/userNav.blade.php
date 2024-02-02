@@ -19,14 +19,9 @@
       </div>
       <ul id="collapseMenu" class='lg:flex lg:space-x-5 max-lg:space-y-2 max-lg:hidden max-lg:py-4 max-lg:w-full'>
         <li class='max-lg:border-b max-lg:bg-[#007bff] max-lg:py-2 px-3 max-lg:rounded'>
-          <a href='javascript:void(0)'
+          <a href='/utilisateur'
             class='lg:hover:text-[#007bff] text-[#007bff] max-lg:text-white block font-semibold text-[15px]'>Home</a>
         </li>
-        <li class='max-lg:border-b max-lg:py-2 px-3 max-lg:rounded'><a href='javascript:void(0)'
-            class='lg:hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]'>Aventures</a>
-        </li>
-       
-       
       </ul>
     </div>
   </header>

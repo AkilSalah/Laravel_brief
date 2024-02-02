@@ -60,8 +60,9 @@ class aventuresController extends Controller
         $userCount = User::count();
         $aventureCount = Aventure::count();
         $DestinationsCount = Aventure::distinct('continent')->count();
-        return view ('welcome',compact('aventures','userCount','aventureCount','DestinationsCount'));
+        return view('welcome', compact('aventures', 'userCount', 'aventureCount', 'DestinationsCount'));
     }
+    
 
     public function filterDesc(){
         $aventures = Aventure::with('images')->orderBy('id', 'desc')->get();
@@ -85,7 +86,7 @@ class aventuresController extends Controller
 
     public function singleAventure(Request $request){
         $id = $request->query('id');
-        $singleAventure = Aventure::where('id',$id)->with('images','user')->get();
+        $singleAventure = Aventure::find($id);
         return view ('singleAventure',compact('singleAventure'));
     }
 
