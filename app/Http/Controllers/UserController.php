@@ -35,4 +35,6 @@ class UserController extends Controller
        }
        return redirect()->route('utilisateur', ['userId' => $userId]);
     }
+
+    
 }

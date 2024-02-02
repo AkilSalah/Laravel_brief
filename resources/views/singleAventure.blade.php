@@ -59,13 +59,6 @@
 
                 <div class="w-full shrink-0 grow-0 basis-auto lg:w-6/12 lg:pr-6">
                     <h3 class="mb-4 text-2xl font-bold">Conseils</h3>
-                    <div class="mb-4 flex items-center text-sm font-medium text-primary dark:text-primary-400">
-                        Art
-                    </div>
-                    <p class="mb-6 text-sm text-neutral-500 dark:text-neutral-400">
-                        Published <u>12.01.2022</u> by
-                        <a href="#!">Anna Doe</a>
-                    </p>
                     <p class="text-neutral-500 dark:text-neutral-300">
                         {{ $singleAventure->conseils }}
                     </p>
@@ -74,7 +67,7 @@
             @if (count($singleAventure->images) > 1)
                 <div class="flex flex-wrap">
                     @foreach ($singleAventure->images as $image)
-                        <div class="mb-6 w-full shrink-0 grow-0 basis-auto lg:mb-0 lg:w-6/12 lg:pr-6">
+                        <div class="mb-6 w-full p-4  shrink-0 grow-0 basis-auto lg:mb-0 lg:w-6/12 lg:pr-6">
                             <div class="ripple relative overflow-hidden rounded-lg bg-cover bg-[50%] bg-no-repeat shadow-lg dark:shadow-black/20"
                                 data-te-ripple-init data-te-ripple-color="light">
                                 <img src="{{ URL('/storage/images/' . $image->image) }}" class="w-full" alt="Louvre" />
