@@ -18,7 +18,7 @@ class UserController extends Controller
         $user = User::create($validation);
         auth()->login($user);
         
-        return redirect('/utilisateur') ;
+        return redirect('/utilisateur');
 
     }
     public function logout(){
