@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class aventuresController extends Controller
 {
+    
     public function addAventure(Request $request)
 {
     $data = $request->validate([

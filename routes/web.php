@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\aventuresController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\ValidateDataMidleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,14 +37,22 @@ Route::get('/utilisateur', function () {
 // ----------------------------------------------------------------------
 Route::post('/register',[UserController::class,'userRegister']);
 
-Route::post('/login',[UserController::class,'login']);
+Route::middleware(['ValidateDataMidleware'])->group( function(){
+    Route::post('/login',[UserController::class,'login'])->name('login');
+});
+
 
 Route::post('/',[UserController::class,'logout'])->name('logout') ;
 
 // --------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------
+Route::middleware(['auth'])->group( function(){
+
 Route::post('/utilisateur', [aventuresController::class, 'addAventure'])->name('utilisateur');
 Route::get('/utilisateur', [aventuresController::class, 'afficherAventuresUser'])->name('aventures.utilisateur');
+
+});
+
 // -------------------------------------------------------------------------------------------
 
 
